@@ -15,7 +15,7 @@ A full-featured blog web application built with **Flask**, featuring user authen
 - Create, Read, Update, and Delete blog posts.
 - Secure password hashing with **Flask-Bcrypt**.
 - Database migrations with **Flask-Migrate**.
-- Email integration with **Flask-Mail**.
+- Email integration with **SendGrid API (via official Python SDK)**
 - Modular structure with Blueprints.
 
 ---
@@ -26,7 +26,7 @@ A full-featured blog web application built with **Flask**, featuring user authen
 - **ORM**: SQLAlchemy
 - **Authentication**: Flask-Login
 - **Migrations**: Alembic (via Flask-Migrate)
-- **Mail Service**: Gmail SMTP
+- **Mail Service**: SendGrid (REST API with Python SDK)
 
 ---
 🔑 Environment Variables
@@ -37,6 +37,11 @@ SECRET_KEY
 
 SQLALCHEMY_DATABASE_URI
 
-MAIL_USERNAME
+SENDGRID_API_KEY
 
-MAIL_PASSWORD
+VERIFIED_SENDER_EMAIL
+
+
+## Live Demo
+👉 [Check out the app here](https://flaskblog-render-deployment.onrender.com/)
+

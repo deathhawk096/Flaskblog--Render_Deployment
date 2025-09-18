@@ -5,7 +5,7 @@ from flask import url_for,current_app
 from flask_login import current_user
 #import request
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+from sendgrid.helpers.mail import Mail,Email
 
 
 def save_pic(form_pic):
@@ -36,7 +36,7 @@ def send_email(user):
     reset_url = url_for('users.reset_password', token=token, _external=True)
 
     message = Mail(
-        from_email= os.environ.get('VERIFIED_SENDER_EMAIL'),
+        from_email= Email(os.environ.get('VERIFIED_SENDER_EMAIL'),'Flask Reset Password'),
         to_emails=user.email,
         subject='Password Reset Request',
         html_content=f'''<p>To reset your password, visit the following link:</p>
