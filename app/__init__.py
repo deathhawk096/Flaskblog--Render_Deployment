@@ -4,7 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from app.config import Config
 from flask_migrate import Migrate
-
+import cloudinary
 
 db=SQLAlchemy()
 bcrypt=Bcrypt()
@@ -25,6 +25,14 @@ def create_app(config_class=Config):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     migrate.init_app(app,db)
+
+    cloudinary.config(
+        cloud_name=app.config['CLOUDINARY_CLOUD_NAME'],
+        api_key=app.config['CLOUDINARY_API_KEY'],
+        api_secret=app.config['CLOUDINARY_API_SECRET']
+        )
+
+
 
     from app.main.routes import main
     from app.users.routes import users

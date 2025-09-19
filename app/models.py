@@ -18,7 +18,7 @@ class User(db.Model,UserMixin):
 
     password=db.Column(db.String(60),nullable=False)
 
-    image_file=db.Column(db.String(20),nullable=True,default='default.jpg')
+    image_file=db.Column(db.String(300),nullable=True,default='https://res.cloudinary.com/dpqj7lbrj/image/upload/v1758270767/default_zb1f4a.jpg')
     
 
     posts=db.relationship('Post',backref='author',lazy=True)
