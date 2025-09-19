@@ -9,11 +9,36 @@ from sendgrid.helpers.mail import Mail,Email
 import cloudinary.uploader
 
 
-def save_pic(form_pic):
+def get_public_id_from_url(url):
+    # Remove query params if any
+    url = url.split('?')[0]
+    # Split by /upload/ and take the second part
+    try:
+        path_after_upload = url.split('/upload/')[1]
+        # Remove file extension
+        public_id = os.path.splitext(path_after_upload)[0]
+        return public_id
+    except IndexError:
+        return None
 
+
+
+
+def save_pic(form_pic):
+    default_url='https://res.cloudinary.com/dpqj7lbrj/image/upload/v1758270767/default_zb1f4a.jpg'
     result= cloudinary.uploader.upload(form_pic,
                                        folder='profile_pics',
                                        transformation=[{'width':125,'height':125,'crop':'fill'}])
+    
+
+    if current_user.image_file and current_user.image_file != default_url:
+        public_id=get_public_id_from_url(current_user.image_file)
+        if public_id:
+            try:
+                cloudinary.uploader.destroy(public_id=public_id)
+            except Exception as e:
+                raise e
+
     return result['secure_url']
 
 
@@ -21,6 +46,7 @@ def save_pic(form_pic):
 
 
 def send_email(user):
+    
     token = user.get_reset_token()
     reset_url = url_for('users.reset_password', token=token, _external=True)
 
