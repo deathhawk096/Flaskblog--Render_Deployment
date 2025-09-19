@@ -41,6 +41,12 @@ SENDGRID_API_KEY
 
 VERIFIED_SENDER_EMAIL
 
+CLOUDINARY_CLOUD_NAME
+
+CLOUDINARY_API_KEY
+
+CLOUDINARY_API_SECRET
+
 
 ## Live Demo
 👉 [Check out the app here](https://flaskblog-render-deployment.onrender.com/)

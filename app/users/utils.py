@@ -6,26 +6,15 @@ from flask_login import current_user
 #import request
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail,Email
+import cloudinary.uploader
 
 
 def save_pic(form_pic):
-    hex_code=secrets.token_hex(8)
-    _,f_ext=os.path.splitext(form_pic.filename)
-    picture_fn = hex_code + f_ext
-    picture_path=os.path.join(current_app.root_path,'static/profile_pics',picture_fn)
 
-
-    output_size= (125,125)
-    resize_pic= Image.open(form_pic)
-    resize_pic.thumbnail(output_size)
-    resize_pic.save(picture_path)
-
-    current_pic_path= os.path.join(current_app.root_path,'static/profile_pics',current_user.image_file)
-    if os.path.exists(current_pic_path) and current_user.image_file != "default.jpg":
-        os.remove(current_pic_path)
-#    if current_user.image_file != "default.jpg":
-#        os.remove(f"D:\\VsCode\\Python\\own project\\flask_blog\\static\profile_pics\\{current_user.image_file}")
-    return picture_fn
+    result= cloudinary.uploader.upload(form_pic,
+                                       folder='profile_pics',
+                                       transformation=[{'width':125,'height':125,'crop':'fill'}])
+    return result['secure_url']
 
 
 
