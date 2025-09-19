@@ -27,6 +27,7 @@ A full-featured blog web application built with **Flask**, featuring user authen
 - **Authentication**: Flask-Login
 - **Migrations**: Alembic (via Flask-Migrate)
 - **Mail Service**: SendGrid (REST API with Python SDK)
+- **Cloud Storage**: Cloudinary(with Python SDK)
 
 ---
 🔑 Environment Variables
